@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 p.addEventListener('click', async function(){
                     window.location.href='kategory.html'
                     try {
-                        const response = await fetch(`http://127.0.0.1:8000/product/${prodId}`);
+                        const response = await fetch(`http://localhost:8000/product/${prodId}`);
                         console.log(response)
                           if (response) {
                             $("kateg_img").attr("src", response[0]['Image URL']);
