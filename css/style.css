@@ -119,6 +119,9 @@ article{
     color: #444;
     text-decoration: none;
 }
+.menu_kategory a:hover{
+    cursor: pointer;
+}
 .block2{
     width: 100%;
     height: 510px;

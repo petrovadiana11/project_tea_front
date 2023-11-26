@@ -13,35 +13,42 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('http://localhost:8000/category/kateg')
         .then(response => response.json())
         .then(categories => {
-            const categoriesContainer = document.getElementById('categoriesContainer');
+            const categoriesContainer = document.getElementById('menu_kategory');
 
             categories.forEach(category => {
 
-                const kategBlock = document.createElement('div');
-                kategBlock.classList.add('kateg_block');
+                const kategUl = document.createElement('ul');
+                kategUl.classList.add('ul');
 
-                const kategImg = document.createElement('div');
-                kategImg.classList.add('kateg_img');
-
-                const img = document.createElement('img');
-                img.src = '';
-
-                kategImg.appendChild(img);
-
-                const kategText = document.createElement('div');
-                kategText.classList.add('kateg_text');
-
-                const p = document.createElement('p');
+                const kategLi = document.createElement('li');
+                kategLi.classList.add('li');
+                
+                const p = document.createElement('a');
                 p.textContent = category.name;
 
-                kategText.appendChild(p);
+                kategLi.appendChild(p);
+                kategUl.appendChild(kategLi)
+                categoriesContainer.appendChild(kategUl);
+                p.addEventListener('click', async function(){
+                    window.location.href='kategory.html'
+                    try {
+                        const response = await fetch(`http://127.0.0.1:8000/product/${prodId}`);
+                        console.log(response)
+                          if (response) {
+                            $("kateg_img").attr("src", response[0]['Image URL']);
+                            $("name").text(response[0].name);
+                            $("price").text(response[0].price);
+                          } else {
+                            console.error('Ошибка');
+                          }
+                        } catch (error) {
+                          console.error('Ошибка', error);
+                        }
+                    });
+                    
 
-                kategBlock.appendChild(kategImg);
-                kategBlock.appendChild(kategText);
-
-                categoriesContainer.appendChild(kategBlock);
+          
             });
         })
         .catch(error => console.error('Ошибка:', error));
 });
-
