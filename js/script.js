@@ -32,22 +32,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 p.addEventListener('click', async function(){
                     window.location.href='kategory.html'
                     try {
-                        const response = await fetch(`http://localhost:8000/product/${prodId}`);
-                        console.log(response)
-                          if (response) {
-                            $("kateg_img").attr("src", response[0]['Image URL']);
-                            $("name").text(response[0].name);
-                            $("price").text(response[0].price);
-                          } else {
-                            console.error('Ошибка');
-                          }
-                        } catch (error) {
-                          console.error('Ошибка', error);
-                        }
+                      const response = await fetch(`http://localhost:8000/product/${category.prodId}`);
+                      console.log(response);
+                      if (response.ok) {
+                          const data = await response.json();
+                          document.getElementById('kateg_img').src = data[0]['Image URL'];
+                          document.getElementById('name').textContent = data[0].name;
+                          document.getElementById('price').textContent = data[0].price;
+                      } else {
+                          console.error('Ошибка');
+                      }
+                  } catch (error) {
+                      console.error('Ошибка', error);
+                  }
                     });
                     
-
-          
             });
         })
         .catch(error => console.error('Ошибка:', error));
