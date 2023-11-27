@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             sitebarxs.style.display = "block"
         }
-    })
+    })//работа кнопки меню
 
     fetch('http://localhost:8000/category/kateg')
         .then(response => response.json())
@@ -51,4 +51,4 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(error => console.error('Ошибка:', error));
-});
+});//вывод категорий из бд и просмотр продуктов
